@@ -1,0 +1,20 @@
+node
+{
+ def mavenHOME = tool name: "maven3.8.5"   
+ stage('dwonloading')
+ 
+{
+ git credentialsId: 'ded7e062-6df6-4f65-9e8d-7e1ddc7208a0', url: 'https://github.com/mohanlal220/intel-maven.git'
+    
+}
+stage('build')
+{
+    sh "${mavenHOME}/bin/mvn clean package"
+
+}
+    stage('sonarqub-excustion')
+    {
+        sh "${mavenHOME}/bin/mvn sonar:sonar"
+    }
+    
+}
